@@ -38,7 +38,6 @@ ROOT_URLCONF = 'inventarioretail.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        # Reemplaza la lista vacía por esta ruta exacta:
         'DIRS': [BASE_DIR / 'articulos' / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
