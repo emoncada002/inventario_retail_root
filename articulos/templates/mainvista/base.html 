@@ -1,1 +1,42 @@
-# Plantilla visual base institucional
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ titulo_modulo|default:"Sistema de Almacén Retail" }}</title>
+    <!-- Cargamos estilos limpios y profesionales usando Tailwind CSS desde CDN para pruebas rápidos -->
+    <script src="https://tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 font-sans leading-normal tracking-normal">
+
+    <!-- Barra de Navegación del Sistema -->
+    <nav class="bg-blue-900 p-4 shadow-md">
+        <div class="container mx-auto flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <span class="text-2xl">🛒</span>
+                <a href="#" class="text-white font-bold text-xl tracking-tight">RetailStock Control</a>
+            </div>
+            <div class="hidden md:flex items-center space-x-6 text-sm">
+                <a href="#" class="text-white hover:text-blue-200 transition font-medium">📋 Tablero General</a>
+                <a href="#" class="text-white hover:text-blue-200 transition font-medium">📦 Movimientos de Stock</a>
+                <span class="text-blue-200 border-l border-blue-700 pl-4">Colaborador: E. Moncada</span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Contenedor Principal Dinámico -->
+    <main class="container mx-auto px-4 py-8">
+        {% block content %}
+        <!-- Aquí se inyectará el contenido de las pantallas específicas -->
+        {% endblock %}
+    </main>
+
+    <!-- Pie de página Institucional -->
+    <footer class="bg-white border-t border-gray-200 py-4 mt-12">
+        <div class="container mx-auto text-center text-xs text-gray-500">
+            &copy; 2026 Sistema de Gestión de Inventario Retail. Desarrollado para Proyectos Web EBC.
+        </div>
+    </footer>
+
+</body>
+</html>
