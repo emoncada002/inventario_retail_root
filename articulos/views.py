@@ -4,7 +4,8 @@ from django.http import HttpResponse
 def dashboard_retail(request):
     """
     Controlador de la Fase 2 que inyecta el HTML con estilos CSS directos
-    para garantizar la correcta visualización de colores en computadoras de escritorio.
+    para garantizar la correcta visualización de colores en computadoras
+    de escritorio.
     """
     html_contenido = """
     <!DOCTYPE html>
