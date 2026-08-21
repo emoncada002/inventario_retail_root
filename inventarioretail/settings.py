@@ -38,7 +38,8 @@ ROOT_URLCONF = 'inventarioretail.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        # Reemplaza la lista vacía por esta ruta exacta:
+        'DIRS': [BASE_DIR / 'articulos' / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -50,7 +51,6 @@ TEMPLATES = [
         },
     },
 ]
-
 WSGI_APPLICATION = 'inventarioretail.wsgi.application'
 
 # Base de datos relacional local
@@ -93,4 +93,6 @@ USE_I18N = True
 USE_TZ = True
 
 STATIC_URL = 'static/'
+STATIC_ROOT = BASE_DIR / 'staticfiles'
+
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
