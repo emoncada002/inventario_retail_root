@@ -84,7 +84,7 @@ def dashboard_retail(request):
     productos_db = InventarioDAO.obtener_todo_el_inventario()
 
     # Estilos CSS de la interfaz
-    estilos = """
+    estilos = f"""
     <style>
         body {{
             font-family: Arial, sans-serif;
