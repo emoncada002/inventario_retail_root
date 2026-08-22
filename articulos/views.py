@@ -84,7 +84,7 @@ def dashboard_retail(request):
     productos_db = InventarioDAO.obtener_todo_el_inventario()
 
     # Estilos CSS de la interfaz
-    estilos = f"""
+    estilos = """
     <style>
         body {{
             font-family: Arial, sans-serif;
@@ -368,8 +368,11 @@ def dashboard_retail(request):
     html = f"""
     <!DOCTYPE html>
     <html lang="es">
-    <head><meta charset="UTF-8"><title>Inventario Retail</title>
-    {estilos}</head>
+    <head>
+        <meta charset="UTF-8">
+        <title>Inventario Retail</title>
+        {estilos}
+    </head>
     <body>
         <nav><div class="nav-brand">Inventario Retail</div>
             <div class="nav-links">
