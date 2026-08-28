@@ -38,6 +38,7 @@ ROOT_URLCONF = 'inventarioretail.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        # Forzamos la lectura directa de tu carpeta de plantillas de retail:
         'DIRS': [BASE_DIR / 'articulos' / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -50,6 +51,7 @@ TEMPLATES = [
         },
     },
 ]
+
 WSGI_APPLICATION = 'inventarioretail.wsgi.application'
 
 # Base de datos relacional local

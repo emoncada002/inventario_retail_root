@@ -1,0 +1,48 @@
+{% extends 'mainvista/base.html' %}
+{% block content %}
+
+<div class="card">
+    <div class="card-header">
+        <div>
+            <h1>📦 Registro de Movimientos de Almacén</h1>
+            <div class="subtitle">Modifica existencias reales mediante operaciones lógicas de entradas y salidas (Operador: {{ usuario_activo }}).</div>
+        </div>
+        <a href="?pestaana=tablero&usuario={{ usuario_activo }}" class="btn" style="background-color: #4b5563;">⬅️ Volver al Tablero</a>
+    </div>
+
+    <!-- Formulario estructurado para procesar flujos de stock reales -->
+    <form method="POST" action="?pestaana=movimientos&usuario={{ usuario_activo }}" style="max-width: 600px; margin: 24px 0;">
+        {% csrf_token %}
+        <input type="hidden" name="accion" value="procesar_movimiento">
+        
+        <div class="form-group">
+            <label>Seleccionar Artículo de la Base de Datos:</label>
+            <select name="sku_afectado" required style="width: 100%; padding: 10px; border: 1px solid #d1d5db; border-radius: 4px;">
+                {% for p in productos %}
+                    <option value="{{ p.sku }}">{{ p.sku }} - {{ p.nombre }} (Actual: {{ p.stock_actual }} pzas)</option>
+                {% empty %}
+                    <option value="">No hay productos registrados en db.sqlite3</option>
+                {% endfor %}
+            </select>
+        </div>
+        
+        <div class="form-group">
+            <label>Tipo de Flujo Físico:</label>
+            <select name="tipo_flujo" required style="width: 100%; padding: 10px; border: 1px solid #d1d5db; border-radius: 4px;">
+                <option value="🔺 Entrada">🔺 Entrada (Abastecimiento de Proveedor)</option>
+                <option value="🔻 Salida">🔻 Salida (Venta de Mostrador / Merma)</option>
+            </select>
+        </div>
+        
+        <div class="form-group">
+            <label>Cantidad de Unidades:</label>
+            <input type="number" name="cantidad" min="1" placeholder="Cantidad de piezas a mover" required style="width: 100%; padding: 10px; border: 1px solid #d1d5db; border-radius: 4px;">
+        </div>
+        
+        <button type="submit" class="btn" style="width: 100%; margin-top: 12px; font-weight: bold; background-color: #1e3a8a;">
+            ⚡ Procesar e Incrementar/Decrementar Stock
+        </button>
+    </form>
+</div>
+
+{% endblock %}
