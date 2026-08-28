@@ -1,1 +1,65 @@
-# ANTES: cocina.html (Entradas y salidas de stock)
+{% extends 'mainvista/base.html' %}
+{% block content %}
+
+<div class="card">
+    <div class="card-header">
+        <div>
+            {% if pestaana == 'editar' %}
+                <h1>✏️ Modificar Producto: {{ prod_a_editar.nombre }}</h1>
+                <div class="subtitle">Actualización de metadatos y propiedades de inventario relacional.</div>
+            {% else %}
+                <h1>➕ Registrar Nuevo Producto de Retail</h1>
+                <div class="subtitle">Asignación de claves SKU y existencias iniciales en base de datos.</div>
+            {% endif %}
+        </div>
+        <a href="?pestaana=tablero&usuario={{ usuario_activo }}" class="btn" style="background-color: #4b5563;">⬅️ Volver</a>
+    </div>
+
+    <form method="POST" action="?usuario={{ usuario_activo }}" style="max-width: 600px; margin-top: 24px;">
+        {% csrf_token %}
+        
+        {% if pestaana == 'editar' %}
+            <input type="hidden" name="accion" value="actualizar_producto">
+            <div class="form-group">
+                <label>Código SKU (No modificable):</label>
+                <input type="text" name="sku" value="{{ prod_a_editar.sku }}" readonly style="background-color: #e5e7eb;">
+            </div>
+        {% else %}
+            <input type="hidden" name="accion" value="guardar_producto">
+            <div class="form-group">
+                <label>Código SKU Universal:</label>
+                <input type="text" name="sku" placeholder="Ej. PROD-100" required>
+            </div>
+        {% endif %}
+
+        <div class="form-group">
+            <label>Descripción / Nombre del Artículo:</label>
+            <input type="text" name="nombre" value="{{ prod_a_editar.nombre|default:'' }}" placeholder="Ej. Mochila Ejecutiva" required>
+        </div>
+
+        <div class="form-group">
+            <label>Categoría Logística:</label>
+            <select name="categoria">
+                <option value="Ropa" {% if prod_a_editar.categoria.nombre == 'Ropa' %}selected{% endif %}>Ropa</option>
+                <option value="Calzado" {% if prod_a_editar.categoria.nombre == 'Calzado' %}selected{% endif %}>Calzado</option>
+                <option value="Accesorios" {% if prod_a_editar.categoria.nombre == 'Accesorios' %}selected{% endif %}>Accesorios</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label>Precio Unitario ($):</label>
+            <input type="number" step="0.01" name="precio" value="{{ prod_a_editar.precio|default:'' }}" required>
+        </div>
+
+        <div class="form-group">
+            <label>Existencias en Almacén:</label>
+            <input type="number" name="stock" value="{{ prod_a_editar.stock_actual|default:'' }}" required>
+        </div>
+
+        <button type="submit" class="btn" style="margin-top: 12px; width: 100%;">
+            {% if pestaana == 'editar' %}💾 Actualizar Registro Real{% else %}💾 Guardar Producto Real{% endif %}
+        </button>
+    </form>
+</div>
+
+{% endblock %}
