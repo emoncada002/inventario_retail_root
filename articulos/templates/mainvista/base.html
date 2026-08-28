@@ -2,6 +2,7 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>RetailStock Control</title>
     <style>
         body { font-family: Arial, sans-serif; background-color: #f3f4f6; margin: 0; padding: 0; color: #1f2937; }
@@ -13,26 +14,31 @@
         .nav-user-block { display: flex; align-items: center; gap: 12px; border-left: 1px solid #1e40af; padding-left: 16px; }
         .nav-user { color: #bfdbfe; font-weight: 500; }
         .btn-switch { background-color: #2563eb; color: white; font-size: 13px; padding: 6px 12px; border: 1px solid #60a5fa; border-radius: 4px; cursor: pointer; text-decoration: none; }
+        .btn-switch:hover { background-color: #1d4ed8; }
         main { max-width: 1200px; margin: 32px auto; padding: 0 16px; }
         .card { background-color: white; padding: 24px; border: 1px solid #e5e7eb; box-shadow: 0 1px 3px rgba(0,0,0,0.1); border-radius: 8px; }
         .card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; }
         h1 { font-size: 24px; font-weight: bold; color: #111827; margin: 0; }
         .subtitle { font-size: 14px; color: #6b7280; margin-top: 4px; }
         .btn { background-color: #2563eb; color: white; font-weight: 500; font-size: 14px; padding: 10px 20px; border: none; border-radius: 4px; cursor: pointer; text-decoration: none; display: inline-block; }
-        .btn-danger { background-color: #ef4444; padding: 6px 12px; font-size: 12px; font-weight: 600; border: none; border-radius: 4px; color: white; cursor: pointer; text-decoration: none; }
+        .btn:hover { background-color: #1d4ed8; }
+        .btn-danger { background-color: #ef4444; padding: 6px 12px; font-size: 12px; font-weight: 600; border: none; border-radius: 4px; color: white; cursor: pointer; }
+        .btn-danger:hover { background-color: #dc2626; }
         .alert { background-color: #fef2f2; border-left: 4px solid #ef4444; padding: 16px; border-radius: 0 4px 4px 0; margin-bottom: 24px; display: flex; gap: 12px; }
         .alert-title { font-size: 14px; font-weight: 600; color: #991b1b; margin: 0; }
         .alert-desc { font-size: 12px; color: #b91c1c; margin-top: 4px; }
         .table-container { overflow-x: auto; margin-top: 16px; }
         table { width: 100%; border-collapse: collapse; text-align: left; font-size: 14px; }
         th { background-color: #f9fafb; padding: 12px 24px; font-weight: 600; color: #4b5563; border-bottom: 1px solid #e5e7eb; }
-        td { padding: 16px 24px; border-bottom: 1px solid #e5e7eb; }
+        td { padding: 16px 24px; border-bottom: 1px solid #e5e7eb; vertical-align: middle; }
+        tr:hover { background-color: #f9fafb; }
         .sku { font-family: monospace; font-weight: bold; color: #1d4ed8; }
         .badge-optimo { background-color: #d1fae5; color: #065f46; padding: 4px 10px; border-radius: 9999px; font-size: 12px; font-weight: 600; }
         .badge-critico { background-color: #fee2e2; color: #991b1b; padding: 4px 10px; border-radius: 9999px; font-size: 12px; font-weight: 600; }
         .form-group { margin-bottom: 16px; display: flex; flex-direction: column; gap: 6px; }
         .form-group label { font-size: 14px; font-weight: 600; color: #374151; }
         .form-group input, .form-group select { padding: 10px; border: 1px solid #d1d5db; border-radius: 4px; font-size: 14px; }
+        .img-thumb { width: 50px; height: 50px; object-fit: cover; border-radius: 4px; border: 1px solid #d1d5db; background-color: #f3f4f6; }
     </style>
 </head>
 <body>

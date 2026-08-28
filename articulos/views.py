@@ -1,13 +1,15 @@
 from django.shortcuts import render, redirect
+from django.views.decorators.csrf import csrf_exempt
 from articulos.dao.inventariodao import InventarioDAO
 from articulos.models import Producto, Categoria
 
 
+@csrf_exempt
 def dashboard_retail(request):
     """
-    Controlador definitivo de la Fase 3.
-    Aprovecha la arquitectura nativa de Django separando la lógica del HTML/CSS
-    y consolidando el ciclo CRUD completo (Altas, Bajas, Cambios, Consultas).
+    Controlador lógico definitivo de la Fase 3.
+    Procesa las operaciones CRUD y delega la renderización visual
+    al motor de plantillas nativo de Django.
     """
     pestaana = request.GET.get('pestaana', 'tablero')
     usuario_activo = request.GET.get('usuario', 'E. Moncada')
@@ -15,7 +17,7 @@ def dashboard_retail(request):
         "Sergio Salcedo" if usuario_activo == "E. Moncada" else "E. Moncada"
     )
 
-    # Garantizar la existencia de categorías base en db.sqlite3
+    # Garantizar la existencia de categorías base en el catálogo logístico
     if not Categoria.objects.exists():
         Categoria.objects.create(
             nombre="Ropa", descripcion="Prendas de vestir"
@@ -27,13 +29,14 @@ def dashboard_retail(request):
             nombre="Accesorios", descripcion="Gorras y mochilas"
         )
 
-    # PROCESAMIENTO DE PETICIONES POST (ACCIONES CRUD)
+    # PROCESAMIENTO DE PETICIONES POST (GUARDADO, ACTUALIZACIÓN Y BAJAS
+    # DE REGISTROS)
     if request.method == "POST":
         accion = request.POST.get('accion')
 
         if accion == "guardar_producto":
             cat = Categoria.objects.get(nombre=request.POST.get('categoria'))
-            InventarioDAO.insertar_nuevo_producto(
+            nuevo_prod = InventarioDAO.insertar_nuevo_producto(
                 sku=request.POST.get('sku'),
                 nombre=request.POST.get('nombre'),
                 categoria_id=cat.id,
@@ -41,10 +44,12 @@ def dashboard_retail(request):
                 stock_inicial=request.POST.get('stock'),
                 stock_min=5
             )
+            if request.FILES.get('imagen_prod'):
+                nuevo_prod.imagen = request.FILES.get('imagen_prod')
+                nuevo_prod.save()
             return redirect(f"/?pestaana=tablero&usuario={usuario_activo}")
 
         elif accion == "actualizar_producto":
-            # OPERACIÓN DE ACTUALIZACIÓN
             sku = request.POST.get('sku')
             prod = Producto.objects.get(sku=sku)
             cat = Categoria.objects.get(nombre=request.POST.get('categoria'))
@@ -53,7 +58,11 @@ def dashboard_retail(request):
             prod.categoria = cat
             prod.precio = request.POST.get('precio')
             prod.stock_actual = int(request.POST.get('stock'))
-            prod.save()  # Guarda los cambios modificados de manera permanente
+
+            if request.FILES.get('imagen_prod'):
+                prod.imagen = request.FILES.get('imagen_prod')
+
+            prod.save()
             return redirect(f"/?pestaana=tablero&usuario={usuario_activo}")
 
         elif accion == "procesar_movimiento":
@@ -75,7 +84,7 @@ def dashboard_retail(request):
     productos_db = InventarioDAO.obtener_todo_el_inventario()
     alertas_db = InventarioDAO.consultar_alertas_stock_critico()
 
-    # Preparamos el contexto inicial para los archivos HTML
+    # Preparamos el diccionario de contexto para las plantillas HTML
     contexto = {
         'pestaana': pestaana,
         'usuario_activo': usuario_activo,
@@ -84,7 +93,7 @@ def dashboard_retail(request):
         'alertas': alertas_db,
     }
 
-    # LÓGICA DE RENDERIZACIÓN SEGÚN LA PESTAÑA SELECCIONADA
+    # SELECCIÓN Y RETORNO DE TEMPLATES SEGÚN LA PESTAÑA ACTIVA
     if pestaana == 'registro':
         return render(request, 'mainvista/almacen.html', contexto)
     elif pestaana == 'editar':
@@ -94,5 +103,5 @@ def dashboard_retail(request):
     elif pestaana == 'movimientos':
         return render(request, 'mainvista/movimientos.html', contexto)
 
-    # Por defecto carga el Tablero General
+    # Renderización por defecto del Tablero General
     return render(request, 'mainvista/tablero.html', contexto)
