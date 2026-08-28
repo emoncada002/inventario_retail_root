@@ -17,7 +17,9 @@ class Producto(models.Model):
         max_length=200, verbose_name="Nombre del Producto"
     )
     categoria = models.ForeignKey(
-        Categoria, on_delete=models.CASCADE, verbose_name="Categoría"
+        Categoria,
+        on_delete=models.CASCADE,
+        verbose_name="Categoría",
     )
     precio = models.DecimalField(
         max_digits=10, decimal_places=2, verbose_name="Precio de Venta"
@@ -27,6 +29,14 @@ class Producto(models.Model):
     )
     stock_minimo = models.IntegerField(
         default=5, verbose_name="Stock Mínimo Permitido"
+    )
+
+    # Guarda las fotos en una carpeta llamada 'productos_fotos'
+    imagen = models.ImageField(
+        upload_to="productos_fotos/",
+        blank=True,
+        null=True,
+        verbose_name="Imagen del Producto",
     )
 
     def __str__(self):
