@@ -1,62 +1,65 @@
 [
-  {
-    "model": "articulos.categoria",
-    "pk": 1,
-    "fields": {
-      "nombre": "Ropa",
-      "descripcion": "Prendas de vestir y uniformes de piso"
-    }
-  },
-  {
-    "model": "articulos.categoria",
-    "pk": 2,
-    "fields": {
-      "nombre": "Calzado",
-      "descripcion": "Calzado deportivo y botas industriales"
-    }
-  },
-  {
-    "model": "articulos.categoria",
-    "pk": 3,
-    "fields": {
-      "nombre": "Accesorios",
-      "descripcion": "Gorras, mochilas y equipo logístico"
-    }
-  },
-  {
-    "model": "articulos.producto",
-    "pk": 1,
-    "fields": {
-      "sku": "PROD-001",
-      "nombre": "Playera Polo Basic",
-      "categoria": 1,
-      "precio": "299.00",
-      "stock_actual": 45,
-      "stock_minimo": 5
-    }
-  },
-  {
-    "model": "articulos.producto",
-    "pk": 2,
-    "fields": {
-      "sku": "PROD-002",
-      "nombre": "Tenis Running Sport",
-      "categoria": 2,
-      "precio": "1249.00",
-      "stock_actual": 12,
-      "stock_minimo": 5
-    }
-  },
-  {
-    "model": "articulos.producto",
-    "pk": 3,
-    "fields": {
-      "sku": "PROD-003",
-      "nombre": "Gorra Ajustable Retail",
-      "categoria": 3,
-      "precio": "180.00",
-      "stock_actual": 3,
-      "stock_minimo": 5
-    }
+{
+  "model": "articulos.categoria",
+  "pk": 1,
+  "fields": {
+    "nombre": "Ropa",
+    "descripcion": "Prendas de vestir y uniformes de piso"
   }
+},
+{
+  "model": "articulos.categoria",
+  "pk": 2,
+  "fields": {
+    "nombre": "Calzado",
+    "descripcion": "Calzado deportivo y botas industriales"
+  }
+},
+{
+  "model": "articulos.categoria",
+  "pk": 3,
+  "fields": {
+    "nombre": "Accesorios",
+    "descripcion": "Gorras, mochilas y equipo logístico"
+  }
+},
+{
+  "model": "articulos.producto",
+  "pk": 1,
+  "fields": {
+    "sku": "PROD-001",
+    "nombre": "Playera Polo Basic",
+    "categoria": 1,
+    "precio": "299.00",
+    "stock_actual": 45,
+    "stock_minimo": 5,
+    "imagen": "productos_fotos/playera_polo_9Ec1tR9.jpg"
+  }
+},
+{
+  "model": "articulos.producto",
+  "pk": 2,
+  "fields": {
+    "sku": "PROD-002",
+    "nombre": "Tenis Running Sport",
+    "categoria": 2,
+    "precio": "1249.00",
+    "stock_actual": 12,
+    "stock_minimo": 5,
+    "imagen": "productos_fotos/tennis_running_rrDnlvB.jpg"
+  }
+},
+{
+  "model": "articulos.producto",
+  "pk": 3,
+  "fields": {
+    "sku": "PROD-003",
+    "nombre": "Gorra Ajustable Retail",
+    "categoria": 3,
+    "precio": "180.00",
+    "stock_actual": 3,
+    "stock_minimo": 5,
+    "imagen": "productos_fotos/gorra_ajustable.jpg"
+  }
+}
 ]
