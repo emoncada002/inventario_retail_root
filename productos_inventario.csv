@@ -1,0 +1,31 @@
+﻿sku,nombre,categoria,precio,stock_actual,stock_minimo
+ROP-001,Playera básica blanca,Ropa,249.0,35,10
+ROP-002,Playera básica negra,Ropa,249.0,28,10
+ROP-003,Camisa casual azul,Ropa,499.0,18,6
+ROP-004,Blusa manga larga beige,Ropa,449.0,14,5
+ROP-005,Pantalón de mezclilla azul,Ropa,699.0,22,8
+ROP-006,Pantalón chino negro,Ropa,649.0,16,6
+ROP-007,Sudadera con capucha gris,Ropa,749.0,12,5
+ROP-008,Chamarra de mezclilla,Ropa,999.0,9,4
+ROP-009,Vestido casual negro,Ropa,799.0,11,4
+ROP-010,Short deportivo azul,Ropa,349.0,20,7
+CAL-001,Tenis deportivos blancos,Calzado,1299.0,15,5
+CAL-002,Tenis casuales negros,Calzado,1099.0,13,5
+CAL-003,Botas de piel café,Calzado,1599.0,8,3
+CAL-004,Botines negros,Calzado,1399.0,7,3
+CAL-005,Sandalias planas beige,Calzado,599.0,17,6
+CAL-006,Zapatos formales negros,Calzado,1499.0,10,4
+CAL-007,Mocasines café,Calzado,1199.0,9,3
+CAL-008,Tenis para correr gris,Calzado,1399.0,14,5
+CAL-009,Zapatillas de tacón negro,Calzado,999.0,6,3
+CAL-010,Pantuflas de casa,Calzado,399.0,21,7
+ACC-001,Cinturón de piel negro,Accesorios,399.0,24,8
+ACC-002,Cinturón de piel café,Accesorios,399.0,19,7
+ACC-003,Gorra deportiva negra,Accesorios,299.0,30,10
+ACC-004,Mochila urbana gris,Accesorios,799.0,12,4
+ACC-005,Bolso de mano beige,Accesorios,899.0,10,4
+ACC-006,Cartera de piel café,Accesorios,499.0,16,5
+ACC-007,Bufanda tejida gris,Accesorios,349.0,18,6
+ACC-008,Lentes de sol negros,Accesorios,599.0,13,5
+ACC-009,Reloj casual plateado,Accesorios,1199.0,7,3
+ACC-010,Sombrero casual beige,Accesorios,449.0,11,4
