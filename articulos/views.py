@@ -4,16 +4,21 @@ from articulos.dao.inventariodao import InventarioDAO
 from articulos.models import Producto, Categoria
 from django.contrib.auth.decorators import login_required, user_passes_test
 
-#Roles
+# Roles
+
 
 def es_admin(user):
-    """Verifica si el usuario autenticado pertenece al grupo 'Administración' o es staff"""
-    return user.is_authenticated and (user.groups.filter(name='Administración').exists() or user.is_staff)
-    #return user.is_authenticated and (user.groups.filter(name='Cocina').exists() or user.is_staff)
+    """Verifica si el usuario pertenece a 'Administración' o es staff"""
+    return user.is_authenticated and (
+        user.groups.filter(name='Administración').exists() or user.is_staff
+    )
+    # return user.is_authenticated and (
+    #     user.groups.filter(name='Cocina').exists() or user.is_staff
+    # )
+
 
 @login_required
 @user_passes_test(es_admin, login_url='/admin/login/')
-
 @csrf_exempt
 def dashboard_retail(request):
     """
