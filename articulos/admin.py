@@ -55,12 +55,23 @@ class ProductoAdmin(admin.ModelAdmin):
 
                 contador = 0
                 for row in csv.reader(io_string, delimiter=','):
+
                     if row:
-                        Producto.objects.create(
-                            nombre=row[0].strip(),
-                            precio=row[1].strip(),
-                            categoria=row[2].strip().upper()
+                        
+                        categoria_nombre = row[2].strip().upper()
+                        categoria_obj, created = Categoria.objects.get_or_create(
+                        nombre=categoria_nombre
                         )
+
+                        Producto.objects.create(
+                            sku=row[0].strip(),
+                            nombre=row[1].strip(),
+                            categoria=categoria_obj,
+                            precio=row[3].strip(),
+                            stock_actual=row[4].strip(),
+                            stock_minimo=row[5].strip(),
+                        )
+
                         contador += 1
 
                 messages.success(request, f'¡Se cargaron {contador} productos correctamente!')
@@ -72,9 +83,10 @@ class ProductoAdmin(admin.ModelAdmin):
             'form': form,
             'title': 'Cargue Masivo de Productos (CSV)',
             'site_header': admin.site.site_header,
-            'opts': self.model._meta,
+            'opts': self.model._meta,   
         }
-        return render(request, "admin/change_form.html", context)
+        #return render(request, "admin/change_form.html", context)
+        return render(request, "admin/csv_form.html", context)
 
 
 @admin.register(Categoria)
